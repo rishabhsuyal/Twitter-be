@@ -1,6 +1,6 @@
 import express from 'express'
 import auth  from '../middleware/authorization.js'
-// import multer  from "multer"
+
 
 import { 
     createTweet,
@@ -15,11 +15,8 @@ import {
     editTweet,
     deleteTweet,
     getHomeOwn
-   // uploadImages
 } from '../controllers/user.controller.js'
 
-// const storage = multer.memoryStorage();
-// const upload = multer({ storage: storage });
 
 const router = express.Router()
 

@@ -1,9 +1,4 @@
-import CryptoJS from "crypto-js"
 import jwt from "jsonwebtoken"
-import path  from "path"
-import sharp  from 'sharp'
-import fs  from "fs"
-import { v4 }  from 'uuid'
 
 import userSchema from "../schemas/user.js"
 import Tweet from "../schemas/tweet.js"
@@ -166,7 +161,6 @@ export const createTweet = async (req, res) => {
 
 //delete tweet
 export const deleteTweet = async (req, res) => {
-    console.log("entered");
     const { id } = req.body
     if (!id) return res.status(500).send("Error in body passed")
     
@@ -181,7 +175,6 @@ export const deleteTweet = async (req, res) => {
 }
 
 export const editTweet = async(req, res) =>{
-    console.log("triggered");
     const { id, content } = req.body
     if (!content) return res.status(500).send("Err in body passed")
 
@@ -246,49 +239,3 @@ export const followManager = async (req, res) => {
     })
 }
 
-// Upload personal images
-// export const uploadImages = async (req, res) => {
-//     var sendForData = {
-//         banner: null,
-//         photo: null
-//     }
-
-//     const user = await userSchema.findOne({ id: req.files[0].originalname.split("-")[1] })
-//     if (!user) return res.status(500).send("err")
-
-
-//     for (let i = 0; i < req.files.length; i++) {
-//         const file = req.files[i];
-//         let data = file.originalname.split("-")
-//         // data[0] = type (banner / profile)
-//         // data[1] = user id
-
-//         try {
-//             let isHasPhoto = user[data[0]]?.split('/').pop()
-//             // in database data => http://localhost:3030/xxx.webp, we split from '/' and select last item with pop() so we obtained img name.
-//             // transaction result => xxx.webp
-
-//             if (isHasPhoto) fs.unlinkSync(path.resolve() + `\\images\\${isHasPhoto}`);
-//             // output => 'C:\\Users\\xxx\\xxx\\twitter-api\\xxx.webp' 
-//         } catch (error) {
-//             console.log("Old photo could not be deleted")
-//         }
-
-//         const newName = `${v4()}.webp`
-//         const sizes = {
-//             width: data[0] == 'banner' ? 600 : 300,
-//             height: 300
-//         }
-//         await sharp(file.buffer).resize(sizes).toFile(`./images/${newName}`);
-
-//         const imgPath = `http://localhost:3030/images/${newName}`
-//         user[data[0]] = imgPath
-//         sendForData[data[0]] = imgPath
-//         if (i == req.files.length - 1) send()
-//     }
-
-//     function send() {
-//         user.save()
-//         res.send(sendForData)
-//     }
-// }
