@@ -10,7 +10,7 @@ const app = express()
 
 app.use(cors());
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: true }));
 app.use(routes)
 const uri = `mongodb+srv://rishabh:${process.env.pass}@cluster0.gb3oe.mongodb.net/?retryWrites=true&w=majority`
 mongoose
