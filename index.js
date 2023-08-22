@@ -7,16 +7,14 @@ dontenv.config()
 
 const port = process.env.PORT || 3030
 const app = express()
-const uri = "mongodb+srv://rishabh:Suyal12345@cluster0.gb3oe.mongodb.net/?retryWrites=true&w=majority";
 
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-// app.use("/images", express.static('images'));
 app.use(routes)
 
 mongoose
-.connect(uri, {useNewUrlParser: true,useUnifiedTopology: true})
+.connect(process.env.uri, {useNewUrlParser: true,useUnifiedTopology: true})
 .then(console.log("DB Connection successfull"))
 .catch(err=>console.log(err));
 
